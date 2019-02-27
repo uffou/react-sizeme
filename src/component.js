@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import isShallowEqual from 'shallowequal'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
 import withSize from './with-size'
 
-export default class SizeMe extends Component {
+class SizeMe extends Component {
   static propTypes = {
     children: PropTypes.func,
     render: PropTypes.func,
@@ -45,8 +46,8 @@ export default class SizeMe extends Component {
   createComponent = config => {
     this.SizeAware = withSize(config)(({ children }) => children)
   }
-  
-  onSize = size => this.setState({ size });
+
+  onSize = size => this.setState({ size })
 
   render() {
     const { SizeAware } = this
@@ -58,3 +59,4 @@ export default class SizeMe extends Component {
     )
   }
 }
+export default observer(SizeMe)
